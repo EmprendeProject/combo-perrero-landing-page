@@ -20,6 +20,7 @@ import brand10 from './assets/logos de marcas/10.png'
 import brand11 from './assets/logos de marcas/11.png'
 import brand12 from './assets/logos de marcas/12.jpg'
 import ubicacion from './assets/ubicacion tcp.png'
+import noTeCompliques from './assets/no te compliques.jpeg'
 import './App.css'
 
 const BRANDS = [brand1, brand2, brand3, brand4, brand6, brand7, brand8, brand9, brand10, brand11, brand12]
@@ -139,6 +140,13 @@ function Carousel() {
 function App() {
   return (
     <div className="page">
+      {/* Cintillo oferta */}
+      <div className="oferta-cintillo">
+        <span>🔥 Oferta disponible hasta el domingo!</span>
+        <span>🔥 Oferta disponible hasta el domingo!</span>
+        <span>🔥 Oferta disponible hasta el domingo!</span>
+      </div>
+
       {/* Ambient background blobs */}
       <div className="blobs" aria-hidden="true">
         <div className="blob blob-1" />
@@ -146,10 +154,10 @@ function App() {
         <div className="blob blob-3" />
       </div>
 
-      {/* Navbar */}
-      <header className="navbar">
+      {/* Logo */}
+      <div className="logo-top">
         <img src={logoHorizontal} alt="Tu Combo Perrero" className="navbar-logo" />
-      </header>
+      </div>
 
       <main className="hero-section">
 
@@ -168,7 +176,7 @@ function App() {
           <a
             id="cta-whatsapp"
             className="cta-btn"
-            href="https://wa.me/1234567890?text=Hola!%20Quiero%20hacer%20un%20pedido%20%F0%9F%8C%AD"
+            href="https://wa.me/584243427035?text=Hola!%20escribo%20desde%20la%20pagina%20web%20del%20combo%20perrero"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Comprar en WhatsApp"
@@ -195,9 +203,33 @@ function App() {
         />
       </section>
 
+      {/* No te compliques */}
+      <section className="compliques-section">
+        <img
+          src={noTeCompliques}
+          alt="No te compliques"
+          className="compliques-img"
+        />
+      </section>
+
       <footer className="footer">
         <p>© 2026 Tu Combo Perrero · Todos los derechos reservados</p>
       </footer>
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/584243427035?text=Hola!%20escribo%20desde%20la%20pagina%20web%20del%20combo%20perrero"
+        className="floating-wa-btn"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Contactar por WhatsApp"
+      >
+        <svg className="wa-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M16 2C8.268 2 2 8.268 2 16c0 2.49.655 4.83 1.8 6.855L2 30l7.345-1.776A13.94 13.94 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2z" fill="rgba(255,255,255,0.25)" />
+          <path d="M22.5 19.5c-.35-.175-2.065-1.02-2.385-1.135-.32-.115-.553-.175-.785.175s-.9 1.135-1.103 1.368c-.203.232-.405.26-.755.085-.35-.175-1.478-.545-2.815-1.737-1.04-.927-1.743-2.072-1.947-2.422-.203-.35-.022-.54.153-.713.157-.156.35-.407.525-.61.175-.204.233-.35.35-.583.116-.233.058-.437-.03-.612-.087-.175-.785-1.893-1.075-2.593-.283-.68-.57-.588-.785-.598l-.668-.012c-.233 0-.612.087-.932.437-.32.35-1.223 1.195-1.223 2.913s1.252 3.38 1.427 3.612c.175.233 2.463 3.762 5.968 5.275.834.36 1.485.575 1.993.736.837.267 1.6.23 2.203.14.672-.1 2.065-.845 2.357-1.66.29-.815.29-1.515.203-1.66-.087-.146-.32-.232-.67-.407z" fill="#fff" />
+        </svg>
+        <span className="floating-wa-text">Escríbenos por WhatsApp</span>
+      </a>
     </div>
   )
 }
