@@ -203,13 +203,27 @@ function App() {
         />
       </section>
 
-      {/* No te compliques */}
-      <section className="compliques-section">
-        <img
-          src={noTeCompliques}
-          alt="No te compliques"
-          className="compliques-img"
-        />
+
+
+      {/* Horario */}
+      <section className="horario-section">
+        <div className="horario-card">
+          <h2 className="horario-title">
+            <span className="horario-icon">⏰ </span>Nuestro Horario
+          </h2>
+
+          <div className="horario-grid">
+            <div className="horario-item">
+              <p className="horario-dias">Lunes — Sábado</p>
+              <p className="horario-horas">8:30 am – 5:00 pm</p>
+            </div>
+            <div className="horario-divider" aria-hidden="true" />
+            <div className="horario-item">
+              <p className="horario-dias">Domingo</p>
+              <p className="horario-horas horario-horas--short">9:00 am – 1:00 pm</p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <footer className="footer">
