@@ -1,35 +1,35 @@
 import { useState, useEffect, useCallback } from 'react'
-import img1 from './assets/combos/1.png'
-import img2 from './assets/combos/2.png'
-import img3 from './assets/combos/3.png'
-import img4 from './assets/combos/4.png'
-import img5 from './assets/combos/5.png'
-import img6 from './assets/combos/6.png'
-import img7 from './assets/combos/7.png'
-import logoImg from './assets/logo.png'
-import brand1  from './assets/logos de marcas/1.png'
-import brand2  from './assets/logos de marcas/2.png'
-import brand3  from './assets/logos de marcas/3.png'
-import brand4  from './assets/logos de marcas/4.png'
-import brand6  from './assets/logos de marcas/6.png'
-import brand7  from './assets/logos de marcas/7.png'
-import brand8  from './assets/logos de marcas/8.png'
-import brand9  from './assets/logos de marcas/9.png'
-import brand10 from './assets/logos de marcas/10.png'
-import brand11 from './assets/logos de marcas/11.png'
-import brand12 from './assets/logos de marcas/12.jpg'
-import ubicacion from './assets/ubicacion tcp.png'
-import noTeCompliques from './assets/no te compliques.jpeg'
-import tituloPng from './assets/titulo tcp.png'
-import prod1  from './assets/productos/1.jpg'
-import prod2  from './assets/productos/2.jpg'
-import prod3  from './assets/productos/3.jpg'
-import prod4  from './assets/productos/4.jpg'
-import prod5  from './assets/productos/5.jpg'
-import prod6  from './assets/productos/6.jpg'
-import prod7  from './assets/productos/7.jpg'
-import prod8  from './assets/productos/8.jpg'
-import prod9  from './assets/productos/9.jpg'
+import img1 from './assets/combos/1.webp'
+import img2 from './assets/combos/2.webp'
+import img3 from './assets/combos/3.webp'
+import img4 from './assets/combos/4.webp'
+import img5 from './assets/combos/5.webp'
+import img6 from './assets/combos/6.webp'
+import img7 from './assets/combos/7.webp'
+import logoImg from './assets/logo.webp'
+import brand1  from './assets/logos de marcas/1.webp'
+import brand2  from './assets/logos de marcas/2.webp'
+import brand3  from './assets/logos de marcas/3.webp'
+import brand4  from './assets/logos de marcas/4.webp'
+import brand6  from './assets/logos de marcas/6.webp'
+import brand7  from './assets/logos de marcas/7.webp'
+import brand8  from './assets/logos de marcas/8.webp'
+import brand9  from './assets/logos de marcas/9.webp'
+import brand10 from './assets/logos de marcas/10.webp'
+import brand11 from './assets/logos de marcas/11.webp'
+import brand12 from './assets/logos de marcas/12.webp'
+import ubicacion from './assets/ubicacion tcp.webp'
+import noTeCompliques from './assets/no te compliques.webp'
+import tituloPng from './assets/titulo tcp.webp'
+import prod1  from './assets/productos/1.webp'
+import prod2  from './assets/productos/2.webp'
+import prod3  from './assets/productos/3.webp'
+import prod4  from './assets/productos/4.webp'
+import prod5  from './assets/productos/5.webp'
+import prod6  from './assets/productos/6.webp'
+import prod7  from './assets/productos/7.webp'
+import prod8  from './assets/productos/8.webp'
+import prod9  from './assets/productos/9.webp'
 import './App.css'
 
 const BRANDS = [brand1, brand2, brand3, brand4, brand6, brand7, brand8, brand9, brand10, brand11, brand12]
@@ -49,6 +49,7 @@ function BrandStrip() {
               alt={`Marca ${(i % BRANDS.length) + 1}`}
               className="brand-strip__logo"
               draggable={false}
+              loading="lazy"
             />
           ))}
         </div>
@@ -73,6 +74,7 @@ function PhotoStrip() {
               alt={`Producto ${(i % PHOTOS.length) + 1}`}
               className="photo-strip__img"
               draggable={false}
+              loading="lazy"
             />
           ))}
         </div>
@@ -231,6 +233,7 @@ function App() {
           src={ubicacion}
           alt="Nuestra ubicación"
           className="ubicacion-img"
+          loading="lazy"
         />
         <div className="ubicacion-card">
           <div className="ubicacion-header">
