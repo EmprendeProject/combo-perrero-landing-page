@@ -7,7 +7,6 @@ import img5 from './assets/combos/5.png'
 import img6 from './assets/combos/6.png'
 import img7 from './assets/combos/7.png'
 import logoImg from './assets/logo.png'
-import logoHorizontal from './assets/logo horizontal tcp.png'
 import brand1  from './assets/logos de marcas/1.png'
 import brand2  from './assets/logos de marcas/2.png'
 import brand3  from './assets/logos de marcas/3.png'
@@ -21,6 +20,16 @@ import brand11 from './assets/logos de marcas/11.png'
 import brand12 from './assets/logos de marcas/12.jpg'
 import ubicacion from './assets/ubicacion tcp.png'
 import noTeCompliques from './assets/no te compliques.jpeg'
+import tituloPng from './assets/titulo tcp.png'
+import prod1  from './assets/productos/1.jpg'
+import prod2  from './assets/productos/2.jpg'
+import prod3  from './assets/productos/3.jpg'
+import prod4  from './assets/productos/4.jpg'
+import prod5  from './assets/productos/5.jpg'
+import prod6  from './assets/productos/6.jpg'
+import prod7  from './assets/productos/7.jpg'
+import prod8  from './assets/productos/8.jpg'
+import prod9  from './assets/productos/9.jpg'
 import './App.css'
 
 const BRANDS = [brand1, brand2, brand3, brand4, brand6, brand7, brand8, brand9, brand10, brand11, brand12]
@@ -39,6 +48,30 @@ function BrandStrip() {
               src={src}
               alt={`Marca ${(i % BRANDS.length) + 1}`}
               className="brand-strip__logo"
+              draggable={false}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+const PHOTOS = [prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8, prod9]
+
+function PhotoStrip() {
+  const doubled = [...PHOTOS, ...PHOTOS]
+  return (
+    <section className="photo-strip" aria-label="Galería de fotos">
+      <p className="photo-strip__label">Nuestros Productos</p>
+      <div className="photo-strip__track-wrapper">
+        <div className="photo-strip__track">
+          {doubled.map((src, i) => (
+            <img
+              key={i}
+              src={src}
+              alt={`Producto ${(i % PHOTOS.length) + 1}`}
+              className="photo-strip__img"
               draggable={false}
             />
           ))}
@@ -154,19 +187,10 @@ function App() {
         <div className="blob blob-3" />
       </div>
 
-      {/* Logo */}
-      <div className="logo-top">
-        <img src={logoHorizontal} alt="Tu Combo Perrero" className="navbar-logo" />
-      </div>
-
       <main className="hero-section">
 
         {/* Title */}
-        <h1 className="hero-title">
-          <span className="accent">Ahorra en combos</span>
-          <br />
-          y disfruta en compañía
-        </h1>
+        <img src={tituloPng} alt="Ahorra en combos y disfruta en compañía" className="hero-title-img" />
 
         {/* Carousel */}
         <Carousel />
@@ -187,43 +211,109 @@ function App() {
             </svg>
             Comprar en WhatsApp
           </a>
-          <span className="hint">Respuesta rápida · Pedidos al instante</span>
         </div>
+
+        {/* Photo strip de productos */}
+        <PhotoStrip />
+
       </main>
 
       {/* Brand strip */}
+      <div className="brand-heading-wrap">
+        <h2 className="brand-heading">Todo lo que necesitas para tu negocio de comida rápida</h2>
+      </div>
       <BrandStrip />
 
       {/* Ubicación */}
       <section className="ubicacion-section">
+        <h2 className="ubicacion-visita">¡Visítanos hoy!</h2>
         <img
           src={ubicacion}
           alt="Nuestra ubicación"
           className="ubicacion-img"
         />
+        <div className="ubicacion-card">
+          <div className="ubicacion-header">
+            <span className="ubicacion-icon">📍</span>
+            <h2 className="ubicacion-title">Maracay — Centro</h2>
+            <a
+              className="ubicacion-directions-btn"
+              href="https://www.google.com/maps/dir/?api=1&destination=Tu+Combo+Perrero,+7C22%2BVWH,+Maracay+2101,+Aragua"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Cómo llegar →
+            </a>
+          </div>
+          <div className="map-wrapper">
+            <iframe
+              title="Ubicación Tu Combo Perrero"
+              src="https://maps.google.com/maps?q=7C22%2BVWH+Maracay+2101+Aragua+Venezuela&output=embed&hl=es&z=17"
+              width="100%"
+              height="400"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Info block: ubicación + horario */}
+      <section className="info-block" aria-label="Información del local">
+        <div className="info-card">
+
+          {/* Ubicación */}
+          <div className="info-row">
+            <span className="info-icon info-icon--red" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+            </span>
+            <div className="info-text">
+              <p className="info-label">UBICACIÓN</p>
+              <p className="info-detail">Maracay — Centro</p>
+              <p className="info-detail">Calle Santo Michelena / Sucre</p>
+            </div>
+          </div>
+
+          <div className="info-divider" />
+
+          {/* Horario */}
+          <div className="info-row">
+            <span className="info-icon info-icon--red" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm.5 11H11V7h1.5v5.25l4.5 2.67-.75 1.23L12.5 13z"/>
+              </svg>
+            </span>
+            <div className="info-text">
+              <p className="info-label">HORARIOS DE ATENCIÓN</p>
+              <p className="info-detail">Lunes a Sábado: 8:30 am – 5:00 pm</p>
+              <p className="info-detail">Domingos: 9:00 am – 1:00 pm</p>
+            </div>
+          </div>
+
+        </div>
       </section>
 
 
-
-      {/* Horario */}
-      <section className="horario-section">
-        <div className="horario-card">
-          <h2 className="horario-title">
-            <span className="horario-icon">⏰ </span>Nuestro Horario
-          </h2>
-
-          <div className="horario-grid">
-            <div className="horario-item">
-              <p className="horario-dias">Lunes — Sábado</p>
-              <p className="horario-horas">8:30 am – 5:00 pm</p>
-            </div>
-            <div className="horario-divider" aria-hidden="true" />
-            <div className="horario-item">
-              <p className="horario-dias">Domingo</p>
-              <p className="horario-horas horario-horas--short">9:00 am – 1:00 pm</p>
-            </div>
-          </div>
-        </div>
+      {/* CTA final */}
+      <section className="cta-final">
+        <p className="cta-final__text">¿Listo para pedir?</p>
+        <a
+          className="cta-btn"
+          href="https://wa.me/584243427035?text=Hola!%20escribo%20desde%20la%20pagina%20web%20del%20combo%20perrero"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Comprar en WhatsApp"
+        >
+          <svg className="wa-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M16 2C8.268 2 2 8.268 2 16c0 2.49.655 4.83 1.8 6.855L2 30l7.345-1.776A13.94 13.94 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2z" fill="rgba(255,255,255,0.25)" />
+            <path d="M22.5 19.5c-.35-.175-2.065-1.02-2.385-1.135-.32-.115-.553-.175-.785.175s-.9 1.135-1.103 1.368c-.203.232-.405.26-.755.085-.35-.175-1.478-.545-2.815-1.737-1.04-.927-1.743-2.072-1.947-2.422-.203-.35-.022-.54.153-.713.157-.156.35-.407.525-.61.175-.204.233-.35.35-.583.116-.233.058-.437-.03-.612-.087-.175-.785-1.893-1.075-2.593-.283-.68-.57-.588-.785-.598l-.668-.012c-.233 0-.612.087-.932.437-.32.35-1.223 1.195-1.223 2.913s1.252 3.38 1.427 3.612c.175.233 2.463 3.762 5.968 5.275.834.36 1.485.575 1.993.736.837.267 1.6.23 2.203.14.672-.1 2.065-.845 2.357-1.66.29-.815.29-1.515.203-1.66-.087-.146-.32-.232-.67-.407z" fill="#fff" />
+          </svg>
+          Comprar en WhatsApp
+        </a>
       </section>
 
       <footer className="footer">
