@@ -32,6 +32,13 @@ import prod8  from './assets/productos/8.webp'
 import prod9  from './assets/productos/9.webp'
 import './App.css'
 
+// Meta Pixel: evento al hacer click en un CTA de WhatsApp
+function trackWhatsAppClick(location) {
+  if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
+    window.fbq('track', 'Lead', { content_name: 'WhatsApp CTA', cta_location: location })
+  }
+}
+
 const BRANDS = [brand1, brand2, brand3, brand4, brand6, brand7, brand8, brand9, brand10, brand11, brand12]
 
 function BrandStrip() {
@@ -202,6 +209,7 @@ function App() {
           <a
             id="cta-whatsapp"
             className="cta-btn"
+            onClick={() => trackWhatsAppClick('cta_principal')}
             href="https://wa.me/584243427035?text=Hola!%20escribo%20desde%20la%20pagina%20web%20del%20combo%20perrero"
             target="_blank"
             rel="noopener noreferrer"
@@ -306,6 +314,7 @@ function App() {
         <p className="cta-final__text">¿Listo para pedir?</p>
         <a
           className="cta-btn"
+          onClick={() => trackWhatsAppClick('cta_final')}
           href="https://wa.me/584243427035?text=Hola!%20escribo%20desde%20la%20pagina%20web%20del%20combo%20perrero"
           target="_blank"
           rel="noopener noreferrer"
@@ -327,6 +336,7 @@ function App() {
       <a
         href="https://wa.me/584243427035?text=Hola!%20escribo%20desde%20la%20pagina%20web%20del%20combo%20perrero"
         className="floating-wa-btn"
+        onClick={() => trackWhatsAppClick('floating_button')}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contactar por WhatsApp"
