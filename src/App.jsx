@@ -6,7 +6,8 @@ import img4 from './assets/combos/4.webp'
 import img5 from './assets/combos/5.webp'
 import img6 from './assets/combos/6.webp'
 import img7 from './assets/combos/7.webp'
-import logoImg from './assets/logo.webp'
+import img9 from './assets/combos/9.webp'
+import img10 from './assets/combos/10.webp'
 import brand1  from './assets/logos de marcas/1.webp'
 import brand2  from './assets/logos de marcas/2.webp'
 import brand3  from './assets/logos de marcas/3.webp'
@@ -18,8 +19,8 @@ import brand9  from './assets/logos de marcas/9.webp'
 import brand10 from './assets/logos de marcas/10.webp'
 import brand11 from './assets/logos de marcas/11.webp'
 import brand12 from './assets/logos de marcas/12.webp'
+import brand13 from './assets/logos de marcas/13.webp'
 import ubicacion from './assets/ubicacion tcp.webp'
-import noTeCompliques from './assets/no te compliques.webp'
 import tituloPng from './assets/titulo tcp.webp'
 import prod1  from './assets/productos/1.webp'
 import prod2  from './assets/productos/2.webp'
@@ -30,6 +31,9 @@ import prod6  from './assets/productos/6.webp'
 import prod7  from './assets/productos/7.webp'
 import prod8  from './assets/productos/8.webp'
 import prod9  from './assets/productos/9.webp'
+import prod10 from './assets/productos/10.webp'
+import prod11 from './assets/productos/11.webp'
+import prod12 from './assets/productos/12.webp'
 import './App.css'
 
 // Meta Pixel: evento al hacer click en un CTA de WhatsApp
@@ -39,33 +43,45 @@ function trackWhatsAppClick(location) {
   }
 }
 
-const BRANDS = [brand1, brand2, brand3, brand4, brand6, brand7, brand8, brand9, brand10, brand11, brand12]
+// [src, width, height] — dimensiones intrínsecas para evitar saltos de layout (CLS)
+const BRANDS = [
+  [brand1, 300, 196], [brand2, 300, 197], [brand3, 300, 172], [brand4, 300, 184],
+  [brand6, 300, 176], [brand7, 300, 300], [brand8, 300, 190], [brand9, 300, 300],
+  [brand10, 300, 300], [brand11, 300, 300], [brand12, 300, 300], [brand13, 300, 232],
+]
 
 function BrandStrip() {
-  // Duplicate list so the scroll loop is seamless
+  // Duplicate list so the scroll loop is seamless (la copia es decorativa)
   const doubled = [...BRANDS, ...BRANDS]
   return (
     <section className="brand-strip" aria-label="Marcas con las que trabajamos">
       <p className="brand-strip__label">Marcas con las que trabajamos</p>
       <div className="brand-strip__track-wrapper">
         <div className="brand-strip__track">
-          {doubled.map((src, i) => (
-            <img
-              key={i}
-              src={src}
-              alt={`Marca ${(i % BRANDS.length) + 1}`}
-              className="brand-strip__logo"
-              draggable={false}
-              loading="lazy"
-            />
-          ))}
+          {doubled.map(([src, width, height], i) => {
+            const isCopy = i >= BRANDS.length
+            return (
+              <img
+                key={i}
+                src={src}
+                width={width}
+                height={height}
+                alt={isCopy ? '' : `Marca ${i + 1}`}
+                aria-hidden={isCopy || undefined}
+                className="brand-strip__logo"
+                draggable={false}
+                loading="lazy"
+                decoding="async"
+              />
+            )
+          })}
         </div>
       </div>
     </section>
   )
 }
 
-const PHOTOS = [prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8, prod9]
+const PHOTOS = [prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8, prod9, prod10, prod11, prod12]
 
 function PhotoStrip() {
   const doubled = [...PHOTOS, ...PHOTOS]
@@ -74,16 +90,23 @@ function PhotoStrip() {
       <p className="photo-strip__label">Nuestros Productos</p>
       <div className="photo-strip__track-wrapper">
         <div className="photo-strip__track">
-          {doubled.map((src, i) => (
-            <img
-              key={i}
-              src={src}
-              alt={`Producto ${(i % PHOTOS.length) + 1}`}
-              className="photo-strip__img"
-              draggable={false}
-              loading="lazy"
-            />
-          ))}
+          {doubled.map((src, i) => {
+            const isCopy = i >= PHOTOS.length
+            return (
+              <img
+                key={i}
+                src={src}
+                width={400}
+                height={533}
+                alt={isCopy ? '' : `Producto ${i + 1}`}
+                aria-hidden={isCopy || undefined}
+                className="photo-strip__img"
+                draggable={false}
+                loading="lazy"
+                decoding="async"
+              />
+            )
+          })}
         </div>
       </div>
     </section>
@@ -98,6 +121,8 @@ const SLIDES = [
   { src: img5, alt: 'Combo Perrero 5' },
   { src: img6, alt: 'Combo Perrero 6' },
   { src: img7, alt: 'Combo Perrero 7' },
+  { src: img9, alt: 'Combo Perrero 8' },
+  { src: img10, alt: 'Combo Perrero 9' },
 ]
 
 function Carousel() {
@@ -114,13 +139,24 @@ function Carousel() {
   const prev = () => goTo(current - 1)
   const next = () => goTo(current + 1)
 
-  // Auto-advance every 4 seconds
+  // Auto-advance every 4 seconds (pausado si la pestaña no está visible)
   useEffect(() => {
     const timer = setInterval(() => {
+      if (document.hidden) return
       setCurrent((c) => (c + 1) % SLIDES.length)
     }, 4000)
     return () => clearInterval(timer)
   }, [])
+
+  // Solo se descargan la slide actual, la siguiente y las ya vistas
+  const [visited, setVisited] = useState(() => new Set([0, 1]))
+  useEffect(() => {
+    const next = (current + 1) % SLIDES.length
+    setVisited((prevSet) => {
+      if (prevSet.has(current) && prevSet.has(next)) return prevSet
+      return new Set(prevSet).add(current).add(next)
+    })
+  }, [current])
 
   return (
     <div className="carousel" role="region" aria-label="Galería de combos">
@@ -132,12 +168,19 @@ function Carousel() {
             className={`carousel-slide ${i === current ? 'active' : ''}`}
             aria-hidden={i !== current}
           >
-            <img
-              src={slide.src}
-              alt={slide.alt}
-              className="carousel-img"
-              draggable={false}
-            />
+            {(i === current || visited.has(i)) && (
+              <img
+                src={slide.src}
+                alt={slide.alt}
+                width={800}
+                height={1067}
+                className="carousel-img"
+                draggable={false}
+                decoding="async"
+                loading="eager"
+                fetchPriority={i === 0 ? 'high' : 'auto'}
+              />
+            )}
           </div>
         ))}
       </div>
@@ -199,7 +242,7 @@ function App() {
       <main className="hero-section">
 
         {/* Title */}
-        <img src={tituloPng} alt="Ahorra en combos y disfruta en compañía" className="hero-title-img" />
+        <img src={tituloPng} width={1000} height={408} alt="Ahorra en combos y disfruta en compañía" className="hero-title-img" fetchPriority="high" decoding="async" />
 
         {/* Carousel */}
         <Carousel />
@@ -241,7 +284,10 @@ function App() {
           src={ubicacion}
           alt="Nuestra ubicación"
           className="ubicacion-img"
+          width={1000}
+          height={752}
           loading="lazy"
+          decoding="async"
         />
         <div className="ubicacion-card">
           <div className="ubicacion-header">

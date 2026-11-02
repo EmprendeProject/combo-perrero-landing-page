@@ -48,25 +48,26 @@ body {
 .blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.06;
+  /* Degradado radial en vez de filter: blur() — mismo efecto, mucho más barato */
+  opacity: 0.1;
+  will-change: transform;
   animation: blobDrift 18s ease-in-out infinite alternate;
 }
 .blob-1 {
   width: 560px; height: 560px;
-  background: var(--red);
+  background: radial-gradient(closest-side, var(--red), transparent);
   top: -180px; left: -180px;
   animation-delay: 0s;
 }
 .blob-2 {
   width: 420px; height: 420px;
-  background: var(--yellow);
+  background: radial-gradient(closest-side, var(--yellow), transparent);
   top: 25%; right: -140px;
   animation-delay: -6s;
 }
 .blob-3 {
   width: 340px; height: 340px;
-  background: var(--orange);
+  background: radial-gradient(closest-side, var(--orange), transparent);
   bottom: 10%; left: 25%;
   animation-delay: -12s;
 }
@@ -213,6 +214,14 @@ body {
   height: auto;
   object-fit: contain;
   user-select: none;
+}
+
+/* Respeta usuarios que prefieren menos movimiento y ahorra batería */
+@media (prefers-reduced-motion: reduce) {
+  .blob,
+  .brand-strip__track,
+  .photo-strip__track,
+  .oferta-cintillo span { animation: none !important; }
 }
 
 /* ── ARROW BUTTONS ── */
