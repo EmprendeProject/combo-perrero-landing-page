@@ -1,0 +1,283 @@
+/* ══════════════════════════════════════════════
+   LANDINGS YUMMY (/yummycaracas, /yummymaracay)
+   Todo queda bajo .page--yummy para no tocar la Home.
+   ══════════════════════════════════════════════ */
+
+.page--yummy {
+  --y-50:  #effdf6;
+  --y-100: #d5f9e8;
+  --y-200: #a8f0cf;
+  --y-300: #5fe3a8;
+  --y-400: #22d38a;
+  --y-500: #0fbf76;
+  --y-600: #0a9f62;
+  --y-700: #097e4f;
+  --y-900: #053b26;
+  --y-grad: linear-gradient(135deg, #2ee58f 0%, #0fbf76 45%, #08955b 100%);
+  --y-glow: rgba(15, 191, 118, 0.45);
+
+  background:
+    radial-gradient(120% 60% at 50% 0%, var(--y-50) 0%, #ffffff 60%),
+    #ffffff;
+}
+
+/* ── Cintillo ── */
+.page--yummy .oferta-cintillo {
+  position: relative;
+  z-index: 2;
+  background: var(--y-grad);
+  box-shadow: 0 4px 18px var(--y-glow);
+}
+.page--yummy .oferta-cintillo span {
+  text-shadow: 0 1px 4px rgba(5, 59, 38, 0.35);
+}
+
+/* ── Fondo decorativo ── */
+.y-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.y-blob {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+  animation: blobDrift 18s ease-in-out infinite alternate;
+}
+.y-blob--1 {
+  width: 620px; height: 620px;
+  background: radial-gradient(closest-side, rgba(46, 229, 143, 0.28), transparent);
+  top: -220px; left: -220px;
+}
+.y-blob--2 {
+  width: 460px; height: 460px;
+  background: radial-gradient(closest-side, rgba(245, 197, 24, 0.18), transparent);
+  top: 30%; right: -160px;
+  animation-delay: -6s;
+}
+.y-blob--3 {
+  width: 420px; height: 420px;
+  background: radial-gradient(closest-side, rgba(15, 191, 118, 0.2), transparent);
+  bottom: 5%; left: 10%;
+  animation-delay: -12s;
+}
+
+/* ── Chip de ciudad ── */
+.city-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--y-grad);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 7px 18px 7px 14px;
+  border-radius: 999px;
+  margin: 10px auto 12px;
+  box-shadow: 0 6px 20px var(--y-glow), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  animation: fadeDown 0.5s ease both;
+}
+.city-chip__pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.8);
+  animation: chip-pulse 2s infinite;
+}
+@keyframes chip-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.8); }
+  70%  { box-shadow: 0 0 0 7px rgba(255, 255, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+/* ── Carrusel con aro verde ── */
+.page--yummy .carousel {
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 6px var(--y-300),
+    0 24px 60px rgba(15, 191, 118, 0.28),
+    0 8px 20px rgba(0, 0, 0, 0.08);
+}
+.page--yummy .carousel-btn:hover {
+  background: var(--y-500);
+  color: #fff;
+}
+.page--yummy .dot--active {
+  background: var(--y-400);
+  box-shadow: 0 0 0 2px #fff;
+}
+
+/* ── CTA ── */
+.page--yummy .cta-wrap {
+  margin-top: 30px;
+}
+.cta-btn--yummy {
+  background: var(--y-grad);
+  background-size: 160% 160%;
+  box-shadow:
+    0 10px 34px var(--y-glow),
+    0 4px 12px rgba(5, 59, 38, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  animation: y-gradient 6s ease infinite;
+}
+.cta-btn--yummy:hover {
+  box-shadow:
+    0 14px 44px rgba(15, 191, 118, 0.6),
+    0 6px 16px rgba(5, 59, 38, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+.cta-btn--yummy::after {
+  border-color: rgba(34, 211, 138, 0.5);
+}
+@keyframes y-gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+.yummy-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+.cta-arrow {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+.cta-btn:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+/* ── Beneficios ── */
+.y-perks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+  list-style: none;
+}
+.y-perks li {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--y-700);
+  background: var(--y-50);
+  border: 1px solid var(--y-200);
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+/* ── Mockup ── */
+.hero-mockup-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 28px auto 8px;
+  padding: 0 16px;
+  display: flex;
+  justify-content: center;
+}
+.hero-mockup-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 8% 10%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(46, 229, 143, 0.38), transparent);
+  z-index: -1;
+}
+.hero-mockup-link {
+  display: block;
+  width: 100%;
+  max-width: 440px;
+  text-decoration: none;
+  transition: transform 0.25s ease;
+}
+.hero-mockup-link:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+.hero-mockup-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+  filter: drop-shadow(0 16px 32px rgba(5, 59, 38, 0.18));
+}
+
+/* ── Tarjeta de info ── */
+.info-card--yummy {
+  position: relative;
+  overflow: hidden;
+  border-color: var(--y-200);
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.03),
+    0 20px 50px rgba(15, 191, 118, 0.16);
+}
+.info-card--yummy::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 5px;
+  background: var(--y-grad);
+}
+.info-icon--brand {
+  background: var(--y-grad);
+  color: #fff;
+  box-shadow: 0 6px 16px var(--y-glow);
+}
+.page--yummy .info-label {
+  color: var(--y-700);
+}
+.info-detail--strong {
+  font-weight: 700;
+  color: #111;
+}
+
+/* ── CTA final ── */
+.page--yummy .cta-final {
+  border-top: none;
+  margin: 8px 16px 0;
+  padding: 36px 24px 32px;
+  border-radius: 28px;
+  background:
+    radial-gradient(80% 120% at 50% 0%, rgba(46, 229, 143, 0.35), transparent 70%),
+    var(--y-900);
+}
+.page--yummy .cta-final__text {
+  color: #fff;
+  font-size: clamp(1.3rem, 3vw, 1.6rem);
+}
+
+/* ── Footer ── */
+.footer--yummy {
+  border-top: none;
+  color: var(--y-600);
+  padding-top: 20px;
+}
+
+/* ── Botón flotante ── */
+.floating-wa-btn--yummy {
+  background: var(--y-grad);
+  box-shadow: 0 6px 22px var(--y-glow), 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+.floating-wa-btn--yummy:hover {
+  box-shadow: 0 10px 30px rgba(15, 191, 118, 0.6), 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 480px) {
+  .hero-mockup-wrap { margin: 22px auto 4px; }
+  .hero-mockup-link { max-width: 320px; }
+  .y-perks li { font-size: 0.8rem; }
+  .page--yummy .cta-final { margin: 8px 12px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .y-blob,
+  .city-chip__pulse,
+  .cta-btn--yummy { animation: none !important; }
+}

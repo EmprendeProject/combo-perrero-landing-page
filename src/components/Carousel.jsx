@@ -1,4 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
+import Picture from './Picture.jsx'
+import { SIZES } from '../imageSizes.js'
 import img1 from '../assets/combos/1.webp'
 import img2 from '../assets/combos/2.webp'
 import img3 from '../assets/combos/3.webp'
@@ -9,18 +11,20 @@ import img7 from '../assets/combos/7.webp'
 import img9 from '../assets/combos/9.webp'
 import img10 from '../assets/combos/10.webp'
 
-const SLIDES = [img1, img2, img3, img4, img5, img6, img7, img9, img10].map((src, i) => ({
-  src,
-  alt: `Combo Perrero ${i + 1}`,
-}))
+const SLIDES = [
+  [img1, 1], [img2, 2], [img3, 3], [img4, 4], [img5, 5], [img6, 6], [img7, 7], [img9, 9], [img10, 10],
+].map(([src, n], i) => ({ src, avif: `combo-${n}`, alt: `Combo Perrero ${i + 1}` }))
 
 export default function Carousel({ interval = 4500 }) {
   const [current, setCurrent] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
+  // La primera slide aparece sin animación para no retrasar el LCP
+  const [hasMoved, setHasMoved] = useState(false)
 
   const goTo = useCallback((index) => {
     if (isAnimating) return
     setIsAnimating(true)
+    setHasMoved(true)
     setCurrent((index + SLIDES.length) % SLIDES.length)
     setTimeout(() => setIsAnimating(false), 400)
   }, [isAnimating])
@@ -29,6 +33,7 @@ export default function Carousel({ interval = 4500 }) {
   useEffect(() => {
     const timer = setInterval(() => {
       if (document.hidden) return
+      setHasMoved(true)
       setCurrent((c) => (c + 1) % SLIDES.length)
     }, interval)
     return () => clearInterval(timer)
@@ -45,7 +50,7 @@ export default function Carousel({ interval = 4500 }) {
   }, [current])
 
   return (
-    <div className="carousel" role="region" aria-label="Galería de combos">
+    <div className={`carousel${hasMoved ? ' carousel--animated' : ''}`} role="region" aria-label="Galería de combos">
       <div className="carousel-track">
         {SLIDES.map((slide, i) => (
           <div
@@ -54,7 +59,9 @@ export default function Carousel({ interval = 4500 }) {
             aria-hidden={i !== current}
           >
             {(i === current || visited.has(i)) && (
-              <img
+              <Picture
+                avif={slide.avif}
+                sizes={SIZES.combo}
                 src={slide.src}
                 alt={slide.alt}
                 width={800}

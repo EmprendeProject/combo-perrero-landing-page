@@ -5,7 +5,7 @@
 }
 
 :root {
-  font-family: 'Outfit', system-ui, sans-serif;
+  font-family: 'Outfit Variable', 'Outfit', system-ui, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

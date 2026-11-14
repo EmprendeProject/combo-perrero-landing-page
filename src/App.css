@@ -11,7 +11,7 @@
   --orange: #FF6B35;
   --dark:   #1A1A1A;
   --white:  #FFFFFF;
-  --font:   'Outfit', sans-serif;
+  --font:   'Outfit Variable', 'Outfit', system-ui, sans-serif;
 }
 
 html {
@@ -135,52 +135,6 @@ body {
   animation: fadeDown 0.6s ease both;
 }
 
-/* ── CITY CHIP (CARACAS) ── */
-.city-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #ffffff;
-  color: var(--dark);
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 6px 16px;
-  border-radius: 999px;
-  margin: 6px auto 14px;
-  border: 1.5px solid rgba(78, 172, 134, 0.4);
-  box-shadow: 0 4px 14px rgba(78, 172, 134, 0.18), 0 1px 3px rgba(0, 0, 0, 0.05);
-  animation: fadeDown 0.6s ease both;
-}
-
-.city-chip__pulse {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #4eac86;
-  box-shadow: 0 0 0 0 rgba(78, 172, 134, 0.7);
-  animation: chip-pulse 2s infinite;
-}
-
-.city-chip__text {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-@keyframes chip-pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(78, 172, 134, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 6px rgba(78, 172, 134, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(78, 172, 134, 0);
-  }
-}
-
 /* ── TITLE IMAGE ── */
 .hero-title-img {
   width: min(680px, 88vw);
@@ -188,7 +142,8 @@ body {
   height: auto;
   display: block;
   margin: 0 auto 8px;
-  animation: fadeDown 0.7s 0.08s ease both;
+  /* Solo movimiento (sin opacity 0) para no retrasar el LCP */
+  animation: dropIn 0.6s ease both;
   filter: drop-shadow(0 4px 18px rgba(0,0,0,0.35));
 }
 
@@ -234,7 +189,7 @@ body {
     0 4px 6px rgba(0,0,0,0.04),
     0 24px 64px rgba(0,0,0,0.13),
     0 0 0 1px rgba(0,0,0,0.05);
-  animation: fadeUp 0.8s 0.26s ease both;
+  animation: riseIn 0.6s 0.1s ease both;
   background: #f0f0f0;
 }
 
@@ -250,8 +205,11 @@ body {
 }
 .carousel-slide.active {
   display: block;
+}
+.carousel--animated .carousel-slide.active {
   animation: slideIn 0.45s ease;
 }
+picture { display: contents; }
 
 /* Image — full width, natural height, no crop */
 .carousel-img {
@@ -265,7 +223,7 @@ body {
 /* Respeta usuarios que prefieren menos movimiento y ahorra batería */
 @media (prefers-reduced-motion: reduce) {
   .blob,
-  .caracas-blob,
+  .y-blob,
   .city-chip__pulse,
   .cta-btn::before,
   .cta-btn::after,
@@ -343,7 +301,7 @@ body {
   gap: 10px;
   width: 100%;
   padding: 0 24px;
-  animation: fadeUp 0.8s 0.4s ease both;
+  animation: fadeUp 0.6s 0.15s ease both;
 }
 
 .cta-btn {
@@ -418,152 +376,6 @@ body {
   width: 28px;
   height: 28px;
   flex-shrink: 0;
-}
-
-/* ── YUMMY STYLES (CARACAS) ── */
-/* ── BRAND (#4eac86) / YUMMY STYLES (CARACAS) ── */
-.cta-btn--yummy {
-  background: linear-gradient(135deg, #4eac86 0%, #368f6d 100%);
-  box-shadow:
-    0 8px 32px rgba(78, 172, 134, 0.48),
-    0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.cta-btn--yummy:hover {
-  box-shadow:
-    0 12px 40px rgba(78, 172, 134, 0.65),
-    0 6px 16px rgba(0, 0, 0, 0.2);
-}
-
-.cta-btn--yummy::after {
-  border-color: rgba(78, 172, 134, 0.45);
-}
-
-.floating-wa-btn--yummy {
-  background: linear-gradient(135deg, #4eac86 0%, #368f6d 100%);
-  box-shadow:
-    0 4px 20px rgba(78, 172, 134, 0.45),
-    0 2px 10px rgba(0, 0, 0, 0.15);
-}
-
-.floating-wa-btn--yummy:hover {
-  box-shadow:
-    0 8px 28px rgba(78, 172, 134, 0.6),
-    0 4px 14px rgba(0, 0, 0, 0.2);
-}
-
-.yummy-icon {
-  width: 28px;
-  height: 28px;
-  flex-shrink: 0;
-}
-
-.cta-arrow {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  transition: transform 0.25s ease;
-}
-.cta-btn:hover .cta-arrow {
-  transform: translateX(4px);
-}
-
-.cta-hint {
-  margin-top: 14px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #368f6d;
-  text-align: center;
-}
-
-/* Fondo decorativo Caracas: mismos blobs, paleta verde de marca */
-.caracas-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-.caracas-blob {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.12;
-  will-change: transform;
-  animation: blobDrift 18s ease-in-out infinite alternate;
-}
-.cb-1 {
-  width: 560px; height: 560px;
-  background: radial-gradient(closest-side, #4eac86, transparent);
-  top: -180px; left: -180px;
-}
-.cb-2 {
-  width: 420px; height: 420px;
-  background: radial-gradient(closest-side, var(--yellow), transparent);
-  top: 25%; right: -140px;
-  animation-delay: -6s;
-}
-.cb-3 {
-  width: 340px; height: 340px;
-  background: radial-gradient(closest-side, #368f6d, transparent);
-  bottom: 10%; left: 25%;
-  animation-delay: -12s;
-}
-
-.info-card--caracas {
-  border-color: rgba(78, 172, 134, 0.25);
-  box-shadow:
-    0 4px 6px rgba(0,0,0,0.04),
-    0 20px 60px rgba(78, 172, 134, 0.14);
-}
-.info-detail--strong {
-  font-weight: 700;
-  color: #111;
-}
-
-.footer--caracas {
-  color: #8fbfa9;
-}
-
-/* ── HERO MOCKUP ── */
-.hero-mockup-wrap {
-  width: 100%;
-  max-width: 520px;
-  margin: 24px auto 16px;
-  padding: 0 16px;
-  display: flex;
-  justify-content: center;
-  animation: fadeUp 0.8s 0.5s ease both;
-}
-
-.hero-mockup-link {
-  display: block;
-  width: 100%;
-  max-width: 440px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: transform 0.25s ease, filter 0.25s ease;
-}
-
-.hero-mockup-link:hover {
-  transform: translateY(-4px) scale(1.02);
-}
-
-.hero-mockup-img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  border-radius: 20px;
-  filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.12));
-}
-
-@media (max-width: 480px) {
-  .hero-mockup-wrap {
-    margin: 18px auto 12px;
-  }
-  .hero-mockup-link {
-    max-width: 320px;
-  }
 }
 
 .hint {
@@ -1050,12 +862,6 @@ body {
   color: #fff;
 }
 
-.info-icon--brand {
-  background: linear-gradient(135deg, #4eac86 0%, #368f6d 100%);
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(78, 172, 134, 0.35);
-}
-
 .info-text {
   flex: 1;
 }
@@ -1195,6 +1001,14 @@ body {
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes dropIn {
+  from { transform: translateY(-14px); }
+  to   { transform: translateY(0); }
+}
+@keyframes riseIn {
+  from { transform: translateY(18px); }
+  to   { transform: translateY(0); }
 }
 @keyframes slideIn {
   from { opacity: 0; transform: translateX(30px); }

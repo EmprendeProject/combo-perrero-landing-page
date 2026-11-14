@@ -2,23 +2,42 @@ import { useEffect } from 'react'
 import tituloPng from './assets/titulo tcp.webp'
 import mocup1 from './assets/mocup 1.webp'
 import Carousel from './components/Carousel.jsx'
+import Picture from './components/Picture.jsx'
+import { SIZES } from './imageSizes.js'
 import { BagIcon, ArrowIcon, PinIcon, ClockIcon } from './components/icons.jsx'
 import { YUMMY_URL, trackLead } from './constants.js'
 import './App.css'
+import './yummy.css'
 
-const trackCTAClick = (location) =>
-  trackLead({ content_name: 'Pide por Yummy', cta_location: location, city: 'caracas' })
+// Datos de cada sede. Para agregar otra ciudad: añadir una entrada aquí y su ruta en App.jsx
+const CITIES = {
+  caracas: {
+    name: 'Caracas',
+    address: ['Caracas', 'Edificio Fondo Común, frente a los quioscos de libros'],
+    hours: ['Lunes a Sábado: 8:30 am – 5:00 pm'],
+  },
+  maracay: {
+    name: 'Maracay',
+    address: ['Maracay — Centro', 'Calle Santo Michelena / Sucre'],
+    hours: ['Lunes a Sábado: 8:30 am – 5:00 pm', 'Domingos: 9:00 am – 1:00 pm'],
+  },
+}
 
-function Caracas() {
+function YummyLanding({ city }) {
+  const { name, address, hours } = CITIES[city]
+
+  const trackCTAClick = (location) =>
+    trackLead({ content_name: 'Pide por Yummy', cta_location: location, city })
+
   useEffect(() => {
-    document.title = 'Tu Combo Perrero Caracas – Pide por Yummy 🛵'
+    document.title = `Tu Combo Perrero ${name} – Pide por Yummy 🛵`
     document
       .querySelector('meta[name="description"]')
-      ?.setAttribute('content', 'Tu Combo Perrero en Caracas: pide tus combos para hot dogs y hamburguesas con delivery por Yummy.')
-  }, [])
+      ?.setAttribute('content', `Tu Combo Perrero en ${name}: pide tus combos para hot dogs y hamburguesas con delivery por Yummy.`)
+  }, [name])
 
   return (
-    <div className="page page--caracas">
+    <div className="page page--yummy">
 
       {/* Cintillo oferta */}
       <div className="oferta-cintillo">
@@ -28,30 +47,30 @@ function Caracas() {
       </div>
 
       {/* Fondo decorativo */}
-      <div className="caracas-bg" aria-hidden="true">
-        <div className="caracas-blob cb-1" />
-        <div className="caracas-blob cb-2" />
-        <div className="caracas-blob cb-3" />
+      <div className="y-bg" aria-hidden="true">
+        <div className="y-blob y-blob--1" />
+        <div className="y-blob y-blob--2" />
+        <div className="y-blob y-blob--3" />
       </div>
 
       <main className="hero-section">
 
         {/* City Chip */}
-        <div className="city-chip" aria-label="Sede Caracas">
+        <div className="city-chip" aria-label={`Sede ${name}`}>
           <span className="city-chip__pulse" aria-hidden="true" />
-          <span className="city-chip__text">📍 CARACAS</span>
+          <span className="city-chip__text">{name}</span>
         </div>
 
         {/* Título */}
-        <img
+        <Picture
+          avif="titulo"
+          sizes={SIZES.titulo}
           src={tituloPng}
           width={1000}
           height={408}
           alt="Tu Combo Perrero – Ahorra en combos y disfruta en compañía"
           className="hero-title-img"
           fetchPriority="high"
-          decoding="async"
-          loading="eager"
         />
 
         {/* Carrusel */}
@@ -72,7 +91,10 @@ function Caracas() {
             <span>Pide por Yummy</span>
             <ArrowIcon />
           </a>
-          <p className="cta-hint">🚀 Delivery rápido en toda Caracas</p>
+          <ul className="y-perks" aria-label="Beneficios">
+            <li>🛵 Delivery rápido en {name}</li>
+            <li>🔥 Combos de ahorro</li>
+          </ul>
         </div>
 
         {/* Mockup */}
@@ -85,7 +107,9 @@ function Caracas() {
             aria-label="Pedir en Yummy"
             className="hero-mockup-link"
           >
-            <img
+            <Picture
+              avif="mocup"
+              sizes={SIZES.mocup}
               src={mocup1}
               alt="Tu Combo Perrero en Yummy"
               width={800}
@@ -101,7 +125,7 @@ function Caracas() {
 
       {/* Info block */}
       <section className="info-block" aria-label="Información del local" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 200px' }}>
-        <div className="info-card info-card--caracas">
+        <div className="info-card info-card--yummy">
 
           <div className="info-row">
             <span className="info-icon info-icon--brand" aria-hidden="true">
@@ -109,8 +133,8 @@ function Caracas() {
             </span>
             <div className="info-text">
               <p className="info-label">UBICACIÓN</p>
-              <p className="info-detail info-detail--strong">Caracas</p>
-              <p className="info-detail">Edificio Fondo Común, frente a los quioscos de libros</p>
+              <p className="info-detail info-detail--strong">{address[0]}</p>
+              <p className="info-detail">{address[1]}</p>
             </div>
           </div>
 
@@ -122,7 +146,9 @@ function Caracas() {
             </span>
             <div className="info-text">
               <p className="info-label">HORARIOS</p>
-              <p className="info-detail">Lunes a Sábado: 8:30 am – 5:00 pm</p>
+              {hours.map((h) => (
+                <p key={h} className="info-detail">{h}</p>
+              ))}
             </div>
           </div>
 
@@ -147,8 +173,8 @@ function Caracas() {
         </a>
       </section>
 
-      <footer className="footer footer--caracas">
-        <p>© 2026 Tu Combo Perrero · Caracas 🛵 Yummy</p>
+      <footer className="footer footer--yummy">
+        <p>© 2026 Tu Combo Perrero · {name} 🛵 Yummy</p>
       </footer>
 
       {/* Floating CTA */}
@@ -167,4 +193,4 @@ function Caracas() {
   )
 }
 
-export default Caracas
+export default YummyLanding

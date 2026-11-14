@@ -33,8 +33,39 @@ async function processDir(dir, opts = DEFAULT) {
   }
 }
 
+// Variantes AVIF responsivas para las imágenes de la primera pantalla.
+// Se sirven con <picture> + srcset (ver src/components/Picture.jsx).
+const RESPONSIVE = [
+  { src: 'titulo tcp.png', name: 'titulo', widths: [480, 720, 1000] },
+  { src: 'mocup 1.png', name: 'mocup', widths: [480, 880] },
+  ...['1', '2', '3', '4', '5', '6', '7', '9', '10'].map((n) => ({
+    src: `combos/${n}.png`, name: `combo-${n}`, widths: [480, 800],
+  })),
+];
+
+async function processResponsive() {
+  const outDir = path.resolve('src/assets/avif');
+  await fs.mkdir(outDir, { recursive: true });
+  for (const { src, name, widths } of RESPONSIVE) {
+    for (const w of widths) {
+      const dest = path.join(outDir, `${name}-${w}.avif`);
+      console.log(`AVIF ${name}-${w}...`);
+      await sharp(path.resolve('src/assets', src))
+        .resize(w, null, { withoutEnlargement: true })
+        .avif({ quality: 55, effort: 6 })
+        .toFile(dest);
+    }
+  }
+}
+
 async function run() {
+  if (process.argv.includes('--avif-only')) {
+    await processResponsive();
+    console.log('Done!');
+    return;
+  }
   await processDir(path.resolve('src/assets'));
+  await processResponsive();
 
   // Favicon / apple-touch-icon: el original pesa >1 MB
   await sharp('src/assets/logo.png')

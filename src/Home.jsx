@@ -25,6 +25,8 @@ import prod10 from './assets/productos/10.webp'
 import prod11 from './assets/productos/11.webp'
 import prod12 from './assets/productos/12.webp'
 import Carousel from './components/Carousel.jsx'
+import Picture from './components/Picture.jsx'
+import { SIZES } from './imageSizes.js'
 import { WhatsAppIcon, PinIcon, ClockIcon } from './components/icons.jsx'
 import { WHATSAPP_URL, trackLead } from './constants.js'
 import './App.css'
@@ -122,7 +124,7 @@ function Home() {
       <main className="hero-section">
 
         {/* Title */}
-        <img src={tituloPng} width={1000} height={408} alt="Ahorra en combos y disfruta en compañía" className="hero-title-img" fetchPriority="high" decoding="async" />
+        <Picture avif="titulo" sizes={SIZES.titulo} src={tituloPng} width={1000} height={408} alt="Ahorra en combos y disfruta en compañía" className="hero-title-img" fetchPriority="high" />
 
         {/* Carousel */}
         <Carousel interval={4000} />
