@@ -135,6 +135,52 @@ body {
   animation: fadeDown 0.6s ease both;
 }
 
+/* ── CITY CHIP (CARACAS) ── */
+.city-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  color: var(--dark);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 999px;
+  margin: 6px auto 14px;
+  border: 1.5px solid rgba(78, 172, 134, 0.4);
+  box-shadow: 0 4px 14px rgba(78, 172, 134, 0.18), 0 1px 3px rgba(0, 0, 0, 0.05);
+  animation: fadeDown 0.6s ease both;
+}
+
+.city-chip__pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4eac86;
+  box-shadow: 0 0 0 0 rgba(78, 172, 134, 0.7);
+  animation: chip-pulse 2s infinite;
+}
+
+.city-chip__text {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+@keyframes chip-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(78, 172, 134, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(78, 172, 134, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(78, 172, 134, 0);
+  }
+}
+
 /* ── TITLE IMAGE ── */
 .hero-title-img {
   width: min(680px, 88vw);
@@ -370,6 +416,86 @@ body {
   flex-shrink: 0;
 }
 
+/* ── YUMMY STYLES (CARACAS) ── */
+/* ── BRAND (#4eac86) / YUMMY STYLES (CARACAS) ── */
+.cta-btn--yummy {
+  background: linear-gradient(135deg, #4eac86 0%, #368f6d 100%);
+  box-shadow:
+    0 8px 32px rgba(78, 172, 134, 0.48),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cta-btn--yummy:hover {
+  box-shadow:
+    0 12px 40px rgba(78, 172, 134, 0.65),
+    0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.cta-btn--yummy::after {
+  border-color: rgba(78, 172, 134, 0.45);
+}
+
+.floating-wa-btn--yummy {
+  background: linear-gradient(135deg, #4eac86 0%, #368f6d 100%);
+  box-shadow:
+    0 4px 20px rgba(78, 172, 134, 0.45),
+    0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.floating-wa-btn--yummy:hover {
+  box-shadow:
+    0 8px 28px rgba(78, 172, 134, 0.6),
+    0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.yummy-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+/* ── HERO MOCKUP ── */
+.hero-mockup-wrap {
+  width: 100%;
+  max-width: 520px;
+  margin: 24px auto 16px;
+  padding: 0 16px;
+  display: flex;
+  justify-content: center;
+  animation: fadeUp 0.8s 0.5s ease both;
+}
+
+.hero-mockup-link {
+  display: block;
+  width: 100%;
+  max-width: 440px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.hero-mockup-link:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.hero-mockup-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  border-radius: 20px;
+  filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.12));
+}
+
+@media (max-width: 480px) {
+  .hero-mockup-wrap {
+    margin: 18px auto 12px;
+  }
+  .hero-mockup-link {
+    max-width: 320px;
+  }
+}
+
 .hint {
   font-size: 0.8rem;
   color: #666;
@@ -571,6 +697,101 @@ body {
   border: 1px solid rgba(0,0,0,0.08);
 }
 
+/* ── DELIVERY SECTION (CARACAS) ── */
+.delivery-section {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 680px;
+  margin: 40px auto 20px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.delivery-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(78, 172, 134, 0.12);
+  color: #2b7a5a;
+  border: 1px solid rgba(78, 172, 134, 0.35);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.delivery-badge__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4eac86;
+  box-shadow: 0 0 0 0 rgba(78, 172, 134, 0.7);
+  animation: chip-pulse 2s infinite;
+}
+
+.delivery-title {
+  font-size: clamp(1.6rem, 4.5vw, 2.2rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--dark);
+  margin: 0 0 20px;
+  text-transform: capitalize;
+}
+
+.delivery-img-link {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.delivery-img-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.12),
+    0 4px 12px rgba(78, 172, 134, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: #f0f0f0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.delivery-img-link:hover .delivery-img-wrapper {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.16),
+    0 6px 16px rgba(78, 172, 134, 0.25);
+}
+
+.delivery-img-square {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+  user-select: none;
+}
+
+@media (max-width: 480px) {
+  .delivery-section {
+    margin: 32px auto 16px;
+    padding: 0 16px;
+  }
+  .delivery-img-wrapper {
+    border-radius: 18px;
+  }
+}
+
 
 /* ── NO TE COMPLIQUES ── */
 .compliques-section {
@@ -757,6 +978,12 @@ body {
 .info-icon--red {
   background: #8b1a1a;
   color: #fff;
+}
+
+.info-icon--brand {
+  background: linear-gradient(135deg, #4eac86 0%, #368f6d 100%);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(78, 172, 134, 0.35);
 }
 
 .info-text {
