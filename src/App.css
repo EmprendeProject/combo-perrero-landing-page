@@ -265,6 +265,10 @@ body {
 /* Respeta usuarios que prefieren menos movimiento y ahorra batería */
 @media (prefers-reduced-motion: reduce) {
   .blob,
+  .caracas-blob,
+  .city-chip__pulse,
+  .cta-btn::before,
+  .cta-btn::after,
   .brand-strip__track,
   .photo-strip__track,
   .oferta-cintillo span { animation: none !important; }
@@ -452,6 +456,72 @@ body {
   width: 28px;
   height: 28px;
   flex-shrink: 0;
+}
+
+.cta-arrow {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+.cta-btn:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+.cta-hint {
+  margin-top: 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #368f6d;
+  text-align: center;
+}
+
+/* Fondo decorativo Caracas: mismos blobs, paleta verde de marca */
+.caracas-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.caracas-blob {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.12;
+  will-change: transform;
+  animation: blobDrift 18s ease-in-out infinite alternate;
+}
+.cb-1 {
+  width: 560px; height: 560px;
+  background: radial-gradient(closest-side, #4eac86, transparent);
+  top: -180px; left: -180px;
+}
+.cb-2 {
+  width: 420px; height: 420px;
+  background: radial-gradient(closest-side, var(--yellow), transparent);
+  top: 25%; right: -140px;
+  animation-delay: -6s;
+}
+.cb-3 {
+  width: 340px; height: 340px;
+  background: radial-gradient(closest-side, #368f6d, transparent);
+  bottom: 10%; left: 25%;
+  animation-delay: -12s;
+}
+
+.info-card--caracas {
+  border-color: rgba(78, 172, 134, 0.25);
+  box-shadow:
+    0 4px 6px rgba(0,0,0,0.04),
+    0 20px 60px rgba(78, 172, 134, 0.14);
+}
+.info-detail--strong {
+  font-weight: 700;
+  color: #111;
+}
+
+.footer--caracas {
+  color: #8fbfa9;
 }
 
 /* ── HERO MOCKUP ── */
